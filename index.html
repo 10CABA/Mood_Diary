@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дневник настроения</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <header class="main-header">
+            <h1>Дневник настроения</h1>
+            <div id="notification-container"></div>
+        </header>
+
+        <main>
+            <section class="card mood-input-section">
+                <h2>📄 Новая запись</h2>
+                <div class="mood-selector" id="mood-selector">
+                    <button class="mood-btn" data-mood="1">1</button>
+                    <button class="mood-btn" data-mood="2">2</button>
+                    <button class="mood-btn" data-mood="3">3</button>
+                    <button class="mood-btn" data-mood="4">4</button>
+                    <button class="mood-btn" data-mood="5">5</button>
+                </div>
+                <div class="form-group">
+                    <label for="note-input">Заметка:</label>
+                    <textarea id="note-input" maxlength="200" rows="3" placeholder="Опишите, что повлияло на ваше настроение сегодня..."></textarea>
+                    <div class="form-footer">
+                        <span id="char-count" class="char-counter">0/200</span>
+                        <button id="add-entry-btn" class="btn-primary">💾 Сохранить запись</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="dashboard-grid">
+                <div class="left-dashboard">
+                    <section class="card stats-section">
+                        <h2>📊 Аналитика</h2>
+                        <div id="stats-container">
+                            <div class="stat-item"><span class="stat-label">Среднее настроение</span> <span class="stat-value" id="stat-avg">—</span></div>
+                            <div class="stat-item"><span class="stat-label">Лучшая оценка</span> <span class="stat-value" id="stat-max">—</span></div>
+                            <div class="stat-item"><span class="stat-label">Худшая оценка</span> <span class="stat-value" id="stat-min">—</span></div>
+                            <div class="stat-item"><span class="stat-label">Всего записей</span> <span class="stat-value" id="stat-total">0</span></div>
+                        </div>
+                    </section>
+
+                    <section class="card chart-section">
+                        <h2>📈 Динамика настроения за последние 7 дней</h2>
+                        <pre id="mood-chart">Нет данных для отображения</pre>
+                    </section>
+                </div>
+
+                <section class="card history-section">
+                    <h2>📅 История записей</h2>
+                    <div class="date-filter">
+                        <div class="filter-row">
+                            <label for="date-from">От:</label>
+                            <input type="date" id="date-from">
+                            <label for="date-to">До:</label>
+                            <input type="date" id="date-to">
+                        </div>
+                        <div class="filter-actions">
+                            <button id="filter-btn" class="btn-secondary">🔍 Применить</button>
+                            <button id="reset-filter-btn" class="btn-ghost">Сбросить</button>
+                        </div>
+                    </div>
+                    <div id="entries-container">
+                        <div class="empty-state">
+                            <span class="empty-icon">📝</span>
+                            <p>Здесь будут ваши записи</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <div id="edit-modal" class="modal-overlay" style="display: none;">
+            <div class="modal-content card">
+                <h3>✏️ Редактировать запись</h3>
+                <p class="modal-date" id="modal-date"></p>
+                
+                <label>Настроение:</label>
+                <div class="mood-selector" id="modal-mood-selector">
+                    <button class="mood-btn" data-mood="1">1</button>
+                    <button class="mood-btn" data-mood="2">2</button>
+                    <button class="mood-btn" data-mood="3">3</button>
+                    <button class="mood-btn" data-mood="4">4</button>
+                    <button class="mood-btn" data-mood="5">5</button>
+                </div>
+                
+                <label for="modal-note-input">Заметка:</label>
+                <textarea id="modal-note-input" maxlength="200" rows="3" placeholder="Опишите ваше настроение сегодня..."></textarea>
+                <span class="char-counter" id="modal-char-count">0/200</span>
+                
+                <div class="modal-actions">
+                    <button id="modal-save-btn" class="btn-primary">💾 Сохранить</button>
+                    <button id="modal-cancel-btn" class="btn-ghost">Отмена</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p>Все данные хранятся локально в браузере</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
